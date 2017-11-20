@@ -18,6 +18,20 @@ pub struct Proof<E: Engine> {
     c: E::G1Affine
 }
 
+impl<E:Engine> Proof<E>{
+    pub fn serial(&self)->(<E::G1Affine as CurveAffine>::FieldSerial,<E::G2Affine as CurveAffine>::FieldSerial,<E::G1Affine as CurveAffine>::FieldSerial){
+        (self.a.serial(),self.b.serial(),self.c.serial())
+    }
+
+    pub fn from_serial(serial:(<E::G1Affine as CurveAffine>::FieldSerial,<E::G2Affine as CurveAffine>::FieldSerial,<E::G1Affine as CurveAffine>::FieldSerial))->Self{
+        Proof{
+            a:<E::G1Affine as CurveAffine>::from_serial(serial.0),
+            b:<E::G2Affine as CurveAffine>::from_serial(serial.1),
+            c:<E::G1Affine as CurveAffine>::from_serial(serial.2)
+        }
+    }
+}
+
 pub struct PreparedVerifyingKey<E: Engine> {
     alpha_g1_beta_g2: E::Fqk,
     neg_gamma_g2: <E::G2Affine as CurveAffine>::Prepared,
