@@ -17,7 +17,7 @@ num_cpus = "1.6"
 crossbeam = "0.3"
 
 [dependencies.pairing]
-git = "https://github.com/Senlody/pairing.git"
+git = "https://github.com/cryptape/pairing.git"
 branch = "0.11-release"
 default-features = false
 features = ["unstable-wnaf"]
